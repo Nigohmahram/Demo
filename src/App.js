@@ -24,7 +24,7 @@ class App extends Component{
       count: 0
     }
   }
-
+  
   handleClick = () => {
     this.setState({count: this.state.count + 1})
     // this.setState((prevState) => ({count: prevState.count + 15}))
