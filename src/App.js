@@ -23,22 +23,37 @@ class App extends Component{
     this.state = {
       count: 0,
       key: true,
-      data: 'Usmonov Khojikbar'
+      // data: 'Usmonov Khojikbar'
+      post: [],
+      loading: true,
+      comment: []
 
     }
     this.handleClick = this.handleClick.bind(this)
   }
 
-  getData() {
-    setTimeout(() => {
-      console.log('Our data is updata');
-      this.setState({data: 'Jon Doe'})
-    }, 3000)
-  }
+  // getData() {
+  //   setTimeout(() => {
+  //     console.log('Our data is updata');
+  //     this.setState({data: 'Jon Doe'})
+  //   }, 3000)
+  // }
   componentDidMount(){
-    this.getData  ()
-  }
+    // this.getData  ()
+    console.log('componentDidMount');
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json())
+      .then(data => this.setState({posts: data, loading: false}))
 
+      this.timerId = setInterval(() => {
+        fetch('https://jsonplaceholder.typicode.com/comments')
+      .then(response => response.json())
+      .then(data => this.setState({comment: data}))
+      }, 3000)
+  }
+  componentDidUpdate() {
+    console.log('componentDidUpdate');
+  }
   handleClick = () => {
     // this.setState({count: this.state.count + 1})
     // this.setState({count: this.state.count + 1})
@@ -58,10 +73,9 @@ class App extends Component{
     this.setState({count: 0})
   }
   render(){
-    console.log('render');
     return(
       <div className='App'>
-      <h1>{this.state.data}</h1>
+      {this.state.loading ?  <h3>Lodading...</h3> : <h3>{this.state.posts.length} Was Loaded, and have {this.state.comment.length} comments</h3>}
       <h1>{this.state.count}</h1>
       <button className='block' onClick={() => this.handleClick(this.state.count + 1)}>incr</button>
       <button className='block_b' onClick={() => this.handleClick(0)}>Reset</button>
