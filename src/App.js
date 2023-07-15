@@ -1,4 +1,4 @@
-// import './App.css';
+import './App.css';
 // import Book from './Book'
 // import Loader from './Loader'
 import {Component} from 'react';
@@ -21,21 +21,39 @@ class App extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      count: 0
+      count: 0,
+      key: true
     }
+    this.handleClick = this.handleClick.bind(this)
   }
-  
+
   handleClick = () => {
-    this.setState({count: this.state.count + 1})
+    // this.setState({count: this.state.count + 1})
+    // this.setState({count: this.state.count + 1})
+    // this.setState({count: this.state.count - 1})
     // this.setState((prevState) => ({count: prevState.count + 15}))
     // this.setState((prevState) => ({count: prevState.count + 10}))
     // this.setState((prevState) => ({count: prevState.count + 10}))
   }
+  handleClick = (val) => {
+    this.setState({count: val})
+  }
+  // incr = () => {
+  //   this.setState({count: this.state.count + 1})
+  // }
+  // decr = () => {
+  //   this.setState({count: this.state.count - 1})
+  // }
+  resetCount = () => {
+    this.setState({count: 0})
+  }
   render(){
     return(
-      <div>
-      <h1>Hello World</h1>
-      <button onClick={this.handleClick} >{this.state.count}</button>
+      <div className='App'>
+      <h1>{this.state.count}</h1>
+      <button className='block' onClick={() => this.handleClick(this.state.count + 1)}>incr</button>
+      <button className='block_b' onClick={() => this.handleClick(0)}>Reset</button>
+      <button className='block_i' onClick={() => this.handleClick(this.state.count - 1)}>decr</button>
       </div>
     )
   }
