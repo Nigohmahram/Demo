@@ -22,9 +22,21 @@ class App extends Component{
     super(props);
     this.state = {
       count: 0,
-      key: true
+      key: true,
+      data: 'Usmonov Khojikbar'
+
     }
     this.handleClick = this.handleClick.bind(this)
+  }
+
+  getData() {
+    setTimeout(() => {
+      console.log('Our data is updata');
+      this.setState({data: 'Jon Doe'})
+    }, 3000)
+  }
+  componentDidMount(){
+    this.getData  ()
   }
 
   handleClick = () => {
@@ -35,9 +47,7 @@ class App extends Component{
     // this.setState((prevState) => ({count: prevState.count + 10}))
     // this.setState((prevState) => ({count: prevState.count + 10}))
   }
-  handleClick = (val) => {
-    this.setState({count: val})
-  }
+   handleClick = (val) => {this.setState({count: val})}
   // incr = () => {
   //   this.setState({count: this.state.count + 1})
   // }
@@ -48,8 +58,10 @@ class App extends Component{
     this.setState({count: 0})
   }
   render(){
+    console.log('render');
     return(
       <div className='App'>
+      <h1>{this.state.data}</h1>
       <h1>{this.state.count}</h1>
       <button className='block' onClick={() => this.handleClick(this.state.count + 1)}>incr</button>
       <button className='block_b' onClick={() => this.handleClick(0)}>Reset</button>
